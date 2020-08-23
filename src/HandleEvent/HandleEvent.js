@@ -11,9 +11,6 @@ export default class HandleEvent extends Component {
     }
 
     render() {
-
-
-
         return (
             <div className="container">
                 {/* Truyen callback function thông qua thuộc tính */}
