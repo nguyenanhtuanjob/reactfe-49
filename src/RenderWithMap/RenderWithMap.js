@@ -29,26 +29,51 @@ export default class RenderWithMap extends Component {
         // console.log(content);
         // return content;
 
-        let arrJSXProduct = this.productList.map((product,index)=>{
-            return <div className="col-4" key={index}>
-                <div class="card text-left">
-                  <img class="card-img-top" src="https://picsum.photos/200/200" alt={product.name}/>
-                   <div class="card-body">
-                     <h4 class="card-title">{product.name}</h4>
-                     <p class="card-text">{product.price}</p>
-                   </div>
-                 </div>
-            </div>
-        })
+        // let arrJSXProduct = this.productList.map((product,index)=>{
+        //     return <div className="col-4" key={index}>
+        //         <div class="card text-left">
+        //           <img class="card-img-top" src="https://picsum.photos/200/200" alt={product.name}/>
+        //            <div class="card-body">
+        //              <h4 class="card-title">{product.name}</h4>
+        //              <p class="card-text">{product.price}</p>
+        //            </div>
+        //          </div>
+        //     </div>
+        // })
 
-        return arrJSXProduct;
+        // return arrJSXProduct;
+
+
+        
+    }
+    renderTable = () =>{
+        return this.productList.map((product,index)=>{
+            return <tr key={index}>
+                    <td>{product.id}</td>
+                    <td>{product.name}</td>
+                    <td>{product.price}</td>
+                    <td><button className="btn btn-danger"> Xoá</button></td>
+            </tr>
+        })
     }
     render() {
         return (
             <div className="container">
-                <div className="row">
+                {/* <div className="row">
                 {this.renderProduct()} 
-                </div>
+                </div> */}
+                <table className="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.renderTable()}
+                    </tbody>
+                </table>
                 
             </div>
             
