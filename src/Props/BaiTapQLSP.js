@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import SanPham from "./SanPham";
 
 export default class BaiTapQLSP extends Component {
   // mangSanPham = [
@@ -28,21 +29,7 @@ export default class BaiTapQLSP extends Component {
     return this.props.mangSanPham.map((product, index) => {
       return (
         <div className="col-4" key={index}>
-          <div className="card text-left">
-            <img
-              style={{ width: "100%", height: "250px" }}
-              className="card-img-top"
-              src={product.hinhAnh}
-              alt={product.hinhAnh}
-            />
-            <div className="card-body">
-              <h4 className="card-title">{product.tenSP}</h4>
-              <p className="card-text">{product.gia}</p>
-              <button onClick={()=>{
-                  this.xemChiTiet(product)
-              }} className="btn btn-success">Chi tiết</button>
-            </div>
-          </div>
+          <SanPham sp={product} xemChiTiet={this.xemChiTiet}/>
         </div>
       );
     });

@@ -10,6 +10,7 @@ import RenderWithMap from './RenderWithMap/RenderWithMap';
 import BaiTapRenderPhim from './RenderWithMap/BaiTapRenderPhim';
 import DemoProps from './Props/DemoProps';
 import BaiTapQLSP from './Props/BaiTapQLSP';
+import BaiTapGioHang from './Props/BaiTapGioHang/BaiTapGioHang';
 
 function App() {
 
@@ -37,7 +38,8 @@ function App() {
       {/* <RenderWithMap/> */}
       {/* <BaiTapRenderPhim/> */}
       {/* <DemoProps/> */}
-      <BaiTapQLSP mangSanPham={mangSanPham}/>
+      {/* <BaiTapQLSP mangSanPham={mangSanPham}/> */}
+      <BaiTapGioHang/>
     </div>
   );
 }
