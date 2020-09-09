@@ -12,6 +12,7 @@ import DemoProps from "./Props/DemoProps";
 import BaiTapQLSP from "./Props/BaiTapQLSP";
 import BaiTapGioHang from "./Props/BaiTapGioHang/BaiTapGioHang";
 import BaiTapGioHangRedux from "./BaiTapRedux/BaiTapGioHangRedux/BaiTapGioHangRedux";
+import BaiTapGameTaiXiu from "./BaiTapRedux/BaiTapGameTaiXiu/BaiTapGameTaiXiu";
 
 function App() {
   // let mangSanPham = [
@@ -72,7 +73,8 @@ function App() {
       {/* <DemoProps/> */}
       {/* <BaiTapQLSP mangSanPham={mangSanPham}/> */}
       {/* <BaiTapGioHang/> */}
-      <BaiTapGioHangRedux />
+      {/* <BaiTapGioHangRedux /> */}
+      <BaiTapGameTaiXiu/>
     </div>
   );
 }
