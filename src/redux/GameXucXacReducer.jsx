@@ -34,7 +34,6 @@ export const gameXucXacReducer = (state = stateDefault, action) => {
         let xucXacNgauNhien = mangXucXac[soNgauNhien];
         mangXucXacNgauNhien.push(xucXacNgauNhien);
       }
-
       //cập nhật lại mảng xúc xắc
       state.mangXucXac = mangXucXacNgauNhien;
 
