@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Swal from "sweetalert2";
-import { themSinhVienAction } from "../redux/actions/QuanLySinhVienAction";
+import { themSinhVienAction, capNhatSinhVien } from "../redux/actions/QuanLySinhVienAction";
 class FormSinhVien extends Component {
   state = {
     values: {
@@ -61,7 +61,7 @@ class FormSinhVien extends Component {
       }
     }
     for (let key in this.state.errors) {
-      if (this.state.errors[key].trim() === "") {
+      if (this.state.errors[key].trim() !== "") {
         valid = false;
       }
     }
@@ -91,7 +91,19 @@ class FormSinhVien extends Component {
         'success'
     );
   };
+
+  componentWillReceiveProps(newProps) {
+    //Life Cycle chạy sau khi props thay đổi và trước khi render
+    //Component không chạy lại khi setState
+    //Mỗi lần nd bấm chỉnh sữa thì props thay dổi => newProps chính là prop mới (state.sinhVienSua của redux) => đem props mới gán vào this.state.values
+    this.setState({
+      values: newProps.sinhVienSua
+    }) 
+  }
   render() {
+    // let {sinhVienSua} = this.props;
+    let sinhVienSua = this.state.values;
+
     return (
       <form className="container-fluid">
         <div class="card text-left">
@@ -109,6 +121,7 @@ class FormSinhVien extends Component {
                     id=""
                     className="form-control"
                     onChange={this.handleChangeInput}
+                    value = {sinhVienSua.maSinhVien}
                   />
                   <p className="text-danger">{this.state.errors.maSinhVien}</p>
                 </div>
@@ -120,6 +133,7 @@ class FormSinhVien extends Component {
                     id=""
                     className="form-control"
                     onChange={this.handleChangeInput}
+                    value = {sinhVienSua.tenSinhVien}
                   />
                   <p class="text-danger">{this.state.errors.tenSinhVien}</p>
                 </div>
@@ -133,6 +147,7 @@ class FormSinhVien extends Component {
                     id=""
                     class="form-control"
                     onChange={this.handleChangeInput}
+                    value = {sinhVienSua.email}
                   />
                   <p className="text-danger">{this.state.errors.email}</p>
                 </div>
@@ -144,6 +159,7 @@ class FormSinhVien extends Component {
                     id=""
                     class="form-control"
                     onChange={this.handleChangeInput}
+                    value = {sinhVienSua.soDienThoai}
                   />
                   <p className="text-danger">{this.state.errors.soDienThoai}</p>
                 </div>
@@ -151,10 +167,21 @@ class FormSinhVien extends Component {
                   <div className="col-12 text-right">
                     <button
                       type="submit"
-                      className="btn btn-success"
+                      className="btn btn-success mr-5"
                       onClick={this.handleSubmit}
                     >
                       Thêm sinh viên
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-warning"
+                      onClick={()=>{
+                        //dispatch giá trị sau khi người dùng thay dổi lên redux
+                        let action = capNhatSinhVien(this.state.values);
+                        this.props.dispatch(action);
+                      }}
+                    >
+                      Cập nhật sinh viên
                     </button>
                   </div>
                 </div>
@@ -164,7 +191,24 @@ class FormSinhVien extends Component {
         </div>
       </form>
     );
+
+  }
+  // componentDidUpdate(propsCu,stateCu){
+  //   //set state trong didupdate phải có if
+
+  //   if(this.props.sinhVienSua.maSinhVien !== stateCu.values.maSinhVien){
+  //     this.setState({
+  //       values:propsCu.sinhVienSua
+  //     })
+  //   }
+    
+  // }
+}
+
+const mapStateToProps = (state) =>{
+  return{
+    sinhVienSua: state.QuanLySinhVienReducer.sinhVienSua
   }
 }
 
-export default connect(null)(FormSinhVien);
+export default connect(mapStateToProps)(FormSinhVien);
